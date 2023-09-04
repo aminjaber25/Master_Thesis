@@ -1,0 +1,23 @@
+pip install datasets>=2.6.1
+pip install git+https://github.com/huggingface/transformers@de9255de27abfcae4a1f816b904915f0b1e23cd9 	
+pip install librosa
+pip install evaluate
+pip install jiwer
+pip install gradio
+pip install ipywidgets
+pip install soundfile
+pip install pydub
+pip install tensorboard
+pip install chardet
+pip install accelerate
+conda install -c conda-forge charset-normalizer 
+conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
+conda install -c conda-forge easydict
+
+# important transformar import may cause problem then look for different versions
+
+For the custom implementation, please use a different environment and additionally install the following:
+
+pip install happytransformer
+pip install TTS
+pip install tensorflow<2.11

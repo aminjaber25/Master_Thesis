@@ -1,0 +1,82 @@
+############ for fine_tuning.py ############################
+
+with_drop_out: False
+drop_out: 0.5
+
+dataset_cycle: Base # options: Base or Audio-based_Augment
+
+from_checkpoint: False 
+model_name: Baseline # possibles names: Baseline, Audio-based_Augment, SpecAugment, MixSpeech, SpecSwap,
+                        # Audio-based_Augment_SpecAugment, SpecAugment_MixSpeech, MixSpeech_Audio-based_Augment
+
+from_scratch: True  
+from_scratch_model: "small" # options: tiny, base, small, medium, large
+
+# IMPORTANT: for fine-tuning, both {from_checkpoint} and {from_scratch} have to be False and choose an already trained model in the {model_name}
+fine_tuning: False
+augmentations: none # options: none, SpecAugment, MixSpeech, SpecSwap, SpecAugment_MixSpeech
+
+batch_size: 8
+epoch: 1
+learning_rate: 1e-5
+weight_decay: 0.1
+max_grad_norm: 1.0
+warmup_steps: 500
+save_total_limit: 2
+optim: "adamw_torch"
+
+
+############ for test_model.py ############################
+
+test_model_name: Baseline
+
+
+############ for custom_dataset.py ############################
+
+dataset_path: "cv-corpus-13.0-2023-03-09/de" # path to the tsv files
+create_for_testing: False
+train_split: 500000
+validate_split: 50000
+
+augment_type: "Base" # Base, Audio-based_Augment
+
+
+############ for gen_samples.py ############################
+
+dataset: "custom_dataset/Base/dict" # the number of new generated sampels depend on this training dataset dictionary
+gen_dataset_name: "gen_dataset"
+
+mask_model_path: "bert-base-german-cased"
+TTS_model_name: "tts_models/de/thorsten/vits" # look in Github repo for differnt pretraind model
+TTS_use_gpu: True
+grammer_model_name: "aiassociates/t5-small-grammar-correction-german" # option: "vennify/t5-base-grammar-correction"
+
+word_masking_ratio: 0.6
+
+
+############ for gen_AbA_samples.py ############################
+
+gen_Base_dataset_name: "gen_dataset" # relevent to {gen_dataset_name} on line 42
+gen_AbA_dataset_name:  "gen_dataset_AbA"
+
+Background_Noise_path: "Background_Noise"
+
+
+############ for figure.py ############################
+
+model_trained_path: "Baseline"
+
+tag_name: "eval/wer" # options: "eval/loss", "eval/wer", "train/epoch", "train/learning_rate", "train/loss"
+
+save_plot: True
+
+
+############ for LM_training.py ############################
+
+
+txt_file_name: "lv_text_1.txt" #  see text folder for more options
+random_masking_precentage: 0.3
+
+LM_batch_size: 8
+LM_epoch: 2
+LM_learning_rate: 1e-5
